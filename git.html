@@ -1,0 +1,143 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Style Guide</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Material Design Lite -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+<div class="mdl-layout mdl-js-layout">
+  <!-- Navigation layout -->
+  <header class="mdl-layout__header mdl-layout__header--waterfall">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Git Style Guide 0.1.1</span>
+    </div>
+  </header>
+  <div class="mdl-ribbon"></div>
+
+  <!-- Content -->
+  <main class="mdl-main mdl-layout__content">
+    <div class="mdl-container mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col"></div>
+      <div class="mdl-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+        <div class="mdl-color-text--grey-500">
+          Style Guide &gt; Git Style Guide
+        </div>
+        <h3>はじめに</h3>
+        <p>
+          このスタイルガイドはチーム開発における様々な Git の使い方についてルールを明確にします。まだ手探りなところもあるので、参考情報としてご参照ください。
+        </p>
+
+        <h3>Git サーバーへのアクセス</h3>
+        <h4>git プロトコルを利用</h4>
+        <p>
+          Git サーバーからリポジトリをクローンするには次のコマンドを実行します。
+        </p>
+        <pre>
+          git clone git@github.com:hideharunagakura/(リポジトリ名).git
+        </pre>
+
+        <h3>運用ルール</h3>
+        <h4>ブランチモデル</h4>
+        <li>develop</li>
+        <p>
+          開発の主軸となるブランチ。開発者は、feature ブランチで各機能の開発やバグフィックスを行い、develop ブランチへマージします。
+        </p>
+        <li>feature</li>
+        <p>
+          主要な機能を実装するためのブランチ。機能の実装やバグフィックスなど、タスクごとに feature ブランチを作成し開発を行います。
+        </p>
+        <p>
+          ブランチ名は <i>feature/{issue番号}_***</i> とします。
+        </p>
+        <li>release</li>
+        <p>
+          プロダクトリリースの準備のためのブランチ。リリース予定の機能やバグフィックスをほぼ反映した状態で develop から分岐します。<br>
+          master へマージ後、develop へもマージします。
+        </p>
+        <p>
+          ブランチ名は <i>release/vX.Y.Z</i> とします。
+        </p>
+        <li>master</li>
+        <p>
+          リリースしたソースコードを管理するためのブランチ。リリース作業を行うと、master ブランチへマージされて、リリースタグが打たれます。開発者はこのブランチへのコミットは行いません。
+        </p>
+        <p>
+          タグ名は <i>vX.Y.Z</i> とします。
+        </p>
+
+        <h4>運用手順</h4>
+        <p>
+          1. 開発準備を行う<br>
+          リポジトリ作成直後、master から develop を作成します。
+        </p>
+        <p>
+          2. 機能を開発する<br>
+          develop から feature を作成します。feature は開発する機能毎に作成し、開発していきます。
+        </p>
+        <p>
+          3. 開発中の最新状態を feature に取り込む<br>
+          マージ時のコンフリクトを避けるため、任意のタイミングで develop を feature へマージします。
+        </p>
+        <p>
+          4. 開発済みの機能を develop へ取り込む<br>
+          feature を develop へマージします。Pull Request で問題ないことも確認してもらいます。
+        </p>
+        <p>
+          5. リリース作業の準備を行う<br>
+          リリース準備のため、develop から release を作成します。ここで、バージョンの変更や、小さなバグフィックスを行います。
+        </p>
+        <p>
+          6. リリース完了<br>
+          release を master へマージし、タグを作成します。また、 develop へもマージします。
+        </p>
+
+        <h4>コミット</h4>
+        <p>  
+          コミットメッセージは以下とします。
+        </p>
+        <pre>
+          １行目：変更内容の要約（タイトル、概要）
+          ２行目；空行
+          ３行目：変更した理由（内容、詳細）
+        </pre>
+        <li>１行目</li>
+        <p>
+          コミット種別と要約を記述します。Issues, Redmine 等のチケットと連携している場合はここで紐付けを行います。<br>
+          add: 新規追加（ファイル / 機能）<br>
+          update: 機能修正<br>
+          fix: バグ修正<br>
+          remove: 削除（ファイル / 機能）<br>
+        </p>
+        <li>３行目</li>
+        <p>
+          （オプション）変更した理由をできる限り具体的に書きます。
+        </p>
+
+        <h4>コミットすべきではないファイル</h4>
+        <p>
+          以下のファイルは git の管理に含めるべきではありません。
+        </p>
+        <li><a href="https://github.com/hideharunagakura/gitignore/blob/master/Android.gitignore" target="_blank">Android</a></li>
+        <li><a href="https://github.com/hideharunagakura/gitignore/blob/master/Objective-C.gitignore" target="_blank">ObjC</a></li>
+        <li><a href="https://github.com/hideharunagakura/gitignore/blob/master/Python.gitignore" target="_blank">Python</a></li>
+
+        <h3>トラブルシューティング</h3>
+        <p>
+          何か不明点などありましたらお気軽にお問い合わせください。
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer--left-section"></div>
+    </footer>
+  </main>
+</div>
