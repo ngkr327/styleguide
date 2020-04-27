@@ -1,0 +1,294 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swift Style Guide</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Material Design Lite -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+<div class="mdl-layout mdl-js-layout">
+  <!-- Navigation layout -->
+  <header class="mdl-layout__header mdl-layout__header--waterfall">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Swiftコーディング規約 0.1.0</span>
+    </div>
+  </header>
+  <div class="mdl-ribbon"></div>
+
+  <!-- Content -->
+  <main class="mdl-main mdl-layout__content">
+    <div class="mdl-container mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col"></div>
+      <div class="mdl-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+        <div class="mdl-color-text--grey-500">
+          Style Guide &gt; Swiftコーディング規約
+        </div>
+        <h3>このコーディング規約について</h3>
+        <p>
+          本コーディングガイドはアプリ開発におけるソースコードの一貫性・可読性を保つことを目的としたコーディングスタイルガイドになります。あくまで参考情報としてご参照ください。
+        </p>
+
+        <h3>命名規則</h3>
+        <h4>クラス、列挙体</h4>
+        <p>
+          UpperCamelCase。プレフィックスは付けない。
+        </p>
+
+        <h4>メソッド、Enum の case、変数</h4>
+        <p>
+          lowerCamelCase。
+        </p>
+
+        <h4>定数</h4>
+        <p>
+          クラススコープでの定数はアンダースコア(_)を含む大文字とする。
+        </p>
+
+        <h3>定数と変数</h3>
+        <h4>変数</h4>
+        <p>
+          右辺が値で初期化する場合は左辺に型を記述しない。ただし、型が曖昧な場合は明記する。<br>
+          右辺のクラスを New することで初期化する場合は型が自明なので左辺に型を記述しない。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            let text = "xxx"
+
+            // Int / UInt / NSInteger / NSUInteger の区別がつかないので明記する
+            let i: Int = 0
+
+            let image = UIImage(named: "xxx")
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            let text: String = "xxx"
+      
+            let image: UIImage = UIImage(named: "xxx")
+          </code></pre>
+        </div>
+
+        <h3>文字列と数値</h3>
+        <h4>文字列長判定</h4>
+        <p>
+          文字列のカウントは characters.count を利用する。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            "Swift text".characters.count
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            ("Swift text" as NSString).length
+          </code></pre>
+        </div>
+
+        <h4>ゼロレングスチェック</h4>
+        <p>
+          文字列のゼロレングスチェックは isEmpty プロパティを利用する。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            if "Swift text".isEmpty { }
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            if "Swift text".characters.count == 0 {
+                // Do something
+            }
+          </code></pre>
+        </div>
+
+        <h3>制御構文</h3>
+        <h4>if 文</h4>
+        <p>
+          条件式は括弧で括らない
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            if a == b {
+                // Do something
+            }
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            if (a == b) {
+                // Do something
+            }
+          </code></pre>
+        </div>
+
+        <h4>switch 文</h4>
+        <p>
+          条件式は括弧で括らない。ケースの処理で何も実施しない場合は、break を記述する。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            switch color {
+                case "red":
+                    // Do something
+                case "blue":
+                    break  // Do nothing
+                default:
+                    break  // Do nothing
+            }
+          </code></pre>
+        </div>
+
+        <h4>for 文</h4>
+        <p>
+          ループ処理は for-in 文で記述する。条件式は括弧で括らない。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            for _ in 0..10 {
+                // Do something
+            }
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            for var i = 0; i < 10; i++ {
+                // Do something
+            }
+          </code></pre>
+        </div>
+
+        <h4>演算子</h4>
+        <p>
+          インクリメント、デクリメントについては +=, -= を用いる。
+        </p>
+
+        <h3>関数</h3>
+        <h4>init</h4>
+        <p>
+          NSObject を継承している場合は、init に override を記述し、super.init() をコールする。
+        </p>
+
+        <h4>戻り値が void 型の場合、戻り値の型の記述を省略する。</h4>
+        <div class="sg-code_good">
+          <pre><code>
+            func xxx(text: String) {  }
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            func xxx(text: String) -> () { }
+
+            func xxx(text: String) -> Void { }
+          </code></pre>
+        </div>
+
+        <h4>早期リターン</h4>
+        <p>
+          例外処理の場合、guard を利用して早期に制御を抜ける。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            guard text.isEmpty else { return }
+            // Do something
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            if text.isEmpty {
+                // Do something
+            } else {
+                return
+            }
+          </code></pre>
+        </div>
+
+        <h3>クロージャ</h3>
+          <p>TODO:</p>
+
+        <h3>列挙型 (enum)</h3>
+        <p>
+          rawValue が必要無い場合、enum の型と case の値は記述しない。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            enum Result {
+                case success, error
+            }
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            enum Result {
+                case success
+                case error
+            }
+          </code></pre>
+        </div>
+        <p>
+          rawValue が必要な場合は case ごとに改行して記述する。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            enum Result: String {
+                case success = "success"
+                case error = "error"
+            }
+          </code></pre>
+        </div>
+        <p>
+          型が自明な変数に代入する場合、enum 名を省略する。
+        </p>
+
+        <h3>フォーマット</h3>
+        <h4>スペース</h4>
+        <p>
+          メソッドブラケットと制御構文のブラケットは式と同じ行でオープンブラケットを記述する。<br>
+          メソッドの戻り値の -> の前後にスペースを記述する。<br>
+          コロンの前はスペースを入れず、コロンの後ろにスペースを記述する。<br>
+          カンマの前にはスペースを入れず、カンマの後ろにスペースを記述する。
+        </p>
+        <div class="sg-code_good">
+          <pre><code>
+            func xxx(a: String, b: String) -> Int {
+                // Do something
+            }
+          </code></pre>
+        </div>
+        <div class="sg-code_bad">
+          <pre><code>
+            func xxx(a : String , b : String)->Int
+            {
+                // Do something
+            }
+          </code></pre>
+        </div>
+
+        <h4>セミコロン</h4>
+        <p>
+          行末にセミコロンは記述しない。
+        </p>
+
+        <h4>ファイル終末</h4>
+        <p>
+          ファイル終末は改行する。
+        </p>
+
+        <h3>コメント</h3>
+        <p>
+          HeaderDoc で記述する。
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer--left-section"></div>
+    </footer>
+  </main>
+</div>

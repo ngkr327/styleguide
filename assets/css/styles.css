@@ -1,0 +1,62 @@
+html,
+body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration:none
+}
+
+.sg-code_good {
+  background: #E6FFE5;
+}
+
+.sg-code_good:before {
+  content: "✅";
+  float: left;
+}
+
+.sg-code_bad {
+  background: #F9E2E4;
+}
+
+.sg-code_bad:before {
+  content:"❌";
+  float:left;
+}
+
+/* Material Design Lite
+------------------------------------------------------------ */
+.mdl-layout__header-row {
+  padding-right: 0;
+}
+
+.mdl-ribbon {
+  width: 100%;
+  height: 40vh;
+  background-color: #617d8a;
+  flex-shrink: 0;
+}
+
+.mdl-main {
+  margin-top: -35vh;
+  flex-shrink: 0;
+}
+
+.mdl-container {
+  max-width: 1600px;
+  width: calc(100% - 16px);
+  margin: 0 auto;
+}
+
+.mdl-content {
+  border-radius: 2px;
+  padding: 80px 56px;
+  margin-bottom: 80px;
+}
+
+.mdl-content h3 {
+  margin-top: 48px;
+}
