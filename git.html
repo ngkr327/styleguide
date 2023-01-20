@@ -1,22 +1,21 @@
-<!doctype html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Git Style Guide</title>
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/styles.css" />
 
 <!-- Material Design Lite -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css" />
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
 
 <div class="mdl-layout mdl-js-layout">
   <!-- Navigation layout -->
   <header class="mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Git Style Guide 0.1.1</span>
+      <span class="mdl-layout-title">Git Style Guide 0.2.0</span>
     </div>
   </header>
   <div class="mdl-ribbon"></div>
@@ -40,14 +39,111 @@
           Git サーバーからリポジトリをクローンするには次のコマンドを実行します。
         </p>
         <pre>
-          git clone git@github.com:hideharunagakura/(リポジトリ名).git
+          git clone git@github.com:ngkr327/(リポジトリ名).git
         </pre>
 
         <h3>運用ルール</h3>
-        <h4>ブランチモデル</h4>
-        <li>develop</li>
+        <h4>Issue ラベル</h4>
+        <li>ステータス</li>
         <p>
-          開発の主軸となるブランチ。開発者は、feature ブランチで各機能の開発やバグフィックスを行い、develop ブランチへマージします。
+          Status: Backlog<br>
+          開発案件
+        </p>
+        <p>
+          Status: Design<br>
+          仕様検討、設計段階
+        </p>
+        <p>
+          Status: Ready<br>
+          準備完了、開始前
+        </p>
+        <p>
+          Status: In Progress<br>
+          実装中
+        </p>
+        <p>
+          Status: In Review<br>
+          レビュー待ち / レビュー中
+        </p>
+        <p>
+          Status: Approved<br>
+          リリース待ち
+        </p>
+        <p>
+          Status: Done<br>
+          完了
+        </p>
+        <p>
+          Status: Pending<br>
+          保留中
+        </p>
+        <p>
+          Status: Wontfix Close<br>
+          対応しない
+        </p>
+        <p>
+          Status: Invalid Close<br>
+          誤りのため対応しない
+        </p>
+        <p>
+          Status: Duplicate Close<br>
+          重複のため対応しない
+        </p>
+        <li>優先度</li>
+        <p>
+          Priority: Critical<br>
+          緊急のもの，直ちに対応すべきもの
+        </p>
+        <p>
+          Priority: High<br>
+          優先度：高
+        </p>
+        <p>
+          Priority: Medium<br>
+          優先度：中
+        </p>
+        <p>
+          Priority: Low<br>
+          優先度：低
+        </p>
+        <li>種別</li>
+        <p>
+          Type: Bug<br>
+          バグ
+        </p>
+        <p>
+          Type: Document<br>
+          ドキュメント
+        </p>
+        <p>
+          Type: Discussion<br>
+          議論
+        </p>
+        <p>
+          Type: Enhancement<br>
+          機能強化
+        </p>
+        <p>
+          Type: Feature<br>
+          新機能
+        </p>
+        <p>
+          Type: Publishing<br>
+          公開に伴う作業
+        </p>
+        <p>
+          Type: Refactoring<br>
+          リファクタリング
+        </p>
+        <p>
+          Type: Test<br>
+          テスト
+        </p>
+
+        <h4>ブランチモデル</h4>
+        <li>main</li>
+        <p>
+          開発の主軸となるブランチ。開発者は、feature ブランチで各機能の開発やバグフィックスを行い、main ブランチへマージします。
         </p>
         <li>feature</li>
         <p>
@@ -58,15 +154,15 @@
         </p>
         <li>release</li>
         <p>
-          プロダクトリリースの準備のためのブランチ。リリース予定の機能やバグフィックスをほぼ反映した状態で develop から分岐します。<br>
-          master へマージ後、develop へもマージします。
+          プロダクトリリースの準備のためのブランチ。リリース予定の機能やバグフィックスをほぼ反映した状態で main から分岐します。<br>
+          main へマージ後、production へもマージします。
         </p>
         <p>
           ブランチ名は <i>release/vX.Y.Z</i> とします。
         </p>
-        <li>master</li>
+        <li>production</li>
         <p>
-          リリースしたソースコードを管理するためのブランチ。リリース作業を行うと、master ブランチへマージされて、リリースタグが打たれます。開発者はこのブランチへのコミットは行いません。
+          リリースしたソースコードを管理するためのブランチ。リリース作業を行うと、production ブランチへマージされて、リリースタグが打たれます。開発者はこのブランチへのコミットは行いません。
         </p>
         <p>
           タグ名は <i>vX.Y.Z</i> とします。
@@ -75,36 +171,36 @@
         <h4>運用手順</h4>
         <p>
           1. 開発準備を行う<br>
-          リポジトリ作成直後、master から develop を作成します。
+          リポジトリ作成直後、main から production を作成します。
         </p>
         <p>
           2. 機能を開発する<br>
-          develop から feature を作成します。feature は開発する機能毎に作成し、開発していきます。
+          main から feature を作成します。feature は開発する機能毎に作成し開発していきます。
         </p>
         <p>
           3. 開発中の最新状態を feature に取り込む<br>
-          マージ時のコンフリクトを避けるため、任意のタイミングで develop を feature へマージします。
+          マージ時のコンフリクトを避けるため、任意のタイミングで main を feature へマージします。
         </p>
         <p>
-          4. 開発済みの機能を develop へ取り込む<br>
-          feature を develop へマージします。Pull Request で問題ないことも確認してもらいます。
+          4. 開発済みの機能を main へ取り込む<br>
+          feature を main へマージします。Pull Request で問題ないことも確認してもらいます。
         </p>
         <p>
           5. リリース作業の準備を行う<br>
-          リリース準備のため、develop から release を作成します。ここで、バージョンの変更や、小さなバグフィックスを行います。
+          リリース準備のため、main から release を作成します。ここで、バージョンの変更や、小さなバグフィックスを行います。
         </p>
         <p>
           6. リリース完了<br>
-          release を master へマージし、タグを作成します。また、 develop へもマージします。
+          release を production へマージし、タグを作成します。また main へもマージします。
         </p>
 
         <h4>コミット</h4>
-        <p>  
+        <p>
           コミットメッセージは以下とします。
         </p>
         <pre>
           １行目：変更内容の要約（タイトル、概要）
-          ２行目；空行
+          ２行目：空行
           ３行目：変更した理由（内容、詳細）
         </pre>
         <li>１行目</li>
@@ -124,9 +220,9 @@
         <p>
           以下のファイルは git の管理に含めるべきではありません。
         </p>
-        <li><a href="https://github.com/hideharunagakura/gitignore/blob/master/Android.gitignore" target="_blank">Android</a></li>
-        <li><a href="https://github.com/hideharunagakura/gitignore/blob/master/Objective-C.gitignore" target="_blank">ObjC</a></li>
-        <li><a href="https://github.com/hideharunagakura/gitignore/blob/master/Python.gitignore" target="_blank">Python</a></li>
+        <li><a href="https://github.com/ngkr327/gitignore/blob/master/Android.gitignore" target="_blank">Android</a></li>
+        <li><a href="https://github.com/ngkr327/gitignore/blob/master/Objective-C.gitignore" target="_blank">ObjC</a></li>
+        <li><a href="https://github.com/ngkr327/gitignore/blob/master/Python.gitignore" target="_blank">Python</a></li>
 
         <h3>トラブルシューティング</h3>
         <p>

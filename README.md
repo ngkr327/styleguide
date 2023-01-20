@@ -4,6 +4,10 @@
 
 ## Contents
 
-* **[Git](https://ngkr327.github.io/styleguide/git.html)** - チーム開発における様々な Git の使い方についてルールを明確にします。
+- **[Git](https://ngkr327.github.io/styleguide/git.html)** - チーム開発における様々な Git の使い方についてルールを明確にします。
 
-* **[Swift](https://ngkr327.github.io/styleguide/swift.html)** - Swift アプリ開発におけるコーディング規約を提供します。
+- **[Swift](https://ngkr327.github.io/styleguide/swift.html)** - Swift アプリ開発におけるコーディング規約を提供します。
+
+## Author
+
+Copyright © 2020-2023 Hideharu Nagakura. All rights reserved.
